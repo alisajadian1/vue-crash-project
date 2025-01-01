@@ -1,9 +1,8 @@
 <script setup>
     import { RouterLink } from 'vue-router';
     import JobListing from './JobListing.vue';
-    import  jobData from '@/jobs.json'
     import { reactive, defineProps, onMounted } from 'vue'
-    import { inferRuntimeType } from 'vue/compiler-sfc';
+    // import { inferRuntimeType } from 'vue/compiler-sfc';
     import PulseLoader from 'vue-spinner/src/PulseLoader.vue'
     import axios from 'axios';
 
@@ -24,10 +23,11 @@
 
     onMounted(async () => {
         try {
-            const response = await axios.get('http://localhost:8000/jobs');
+            const response = await axios.get('/api/jobs');
             state.jobs = response.data
         } catch (error) {
             console.error('Error fetching jobs', error)
+            console.log(1)
         } finally {
             state.isLoading = false;
         }
